@@ -45,11 +45,11 @@ open class SlideAnimation {
                 currentTime = System.currentTimeMillis()
                 finishedTime = currentTime - startTime
 
-                when (mAnimSpeed) {
-                    ANIM_SLOW -> endTime = (finishedTime / 280).toInt()
-                    ANIM_NORMAL -> endTime = (finishedTime / 140).toInt()
-                    ANIM_FAST -> endTime = (finishedTime / 70).toInt()
-                    else -> endTime = (finishedTime / 140).toInt()
+                endTime = when (mAnimSpeed) {
+                    ANIM_SLOW -> (finishedTime / 280).toInt()
+                    ANIM_NORMAL -> (finishedTime / 140).toInt()
+                    ANIM_FAST -> (finishedTime / 70).toInt()
+                    else -> (finishedTime / 140).toInt()
                 }
                 //LOG.D(TAG, "finished time: $finishedTime, end time: $endTime")
 
@@ -61,7 +61,7 @@ open class SlideAnimation {
                     startTime = currentTime
                     spannableString.setSpan(
                         ForegroundColorSpan(mBackColor), 0,
-                        msgTextView.text.length - 1,
+                        msgTextView.text.length,
                         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
                 } else {
                     spannableString.setSpan(
